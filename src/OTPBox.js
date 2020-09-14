@@ -1,10 +1,17 @@
 import React, { useState } from "react";
 import App from './App';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 const OTPBox = (props) => {
     const [otp, setOtp] = useState(new Array(4).fill(""));
-
+    const [vr, setVr] = React.useState(false);
+    const home = () =>{
+        setVr(true)
+    }
+    if(vr)
+    {
+        return <Redirect to= "/dashboard" />;
+    }
     const handleChange = (element, index) => {
         if (isNaN(element.value)) return false;
 
@@ -54,9 +61,7 @@ const OTPBox = (props) => {
                         { otp.join("")== '1234' &&
                         <button
                             className="btn btn-primary"
-                            onClick={e =>
-                                alert("Welcome to AdmitKard")
-                            }
+                            onClick={home}
                         >
                             Verify OTP
                         </button>
